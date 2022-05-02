@@ -2,8 +2,12 @@ FROM debian:bullseye
 
 USER root
 WORKDIR /root
+COPY ./docker_entry.sh /root/
 
-RUN mkdir /root/data \
-    && echo "aaa" > /root/data/1.json
+RUN mkdir /root/data-example \
+    && echo "aaa" > /root/data-example/1.json \
+    && chmod +x ./docker_entry.sh
 
-CMD ["bash"]
+ENTRYPOINT ["/root/docker_entry.sh"]
+
+CMD ["primary"]
